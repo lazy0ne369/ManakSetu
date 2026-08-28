@@ -1,0 +1,488 @@
+[
+  {
+    "id": "T1_A1",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "A. General BIS Knowledge",
+    "query": "What is BIS certification and when is it required for a product in India?",
+    "expected_behavior": "Should explain BIS role, Conformity Assessment Regulations, mandatory vs voluntary concepts, and Scheme-I/II basics.",
+    "user_role": "consumer",
+    "target_standards": []
+  },
+  {
+    "id": "T1_A2",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "A. General BIS Knowledge",
+    "query": "What is the difference between an Indian Standard (IS) and a BIS certification scheme?",
+    "expected_behavior": "Should contrast technical specification documents (IS) with conformity assessment licensing procedures (Schemes).",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T1_A3",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "A. General BIS Knowledge",
+    "query": "What is a Quality Control Order (QCO), and how does it affect manufacturers?",
+    "expected_behavior": "Should explain statutory QCOs issued by central line ministries under Section 16 of BIS Act, 2016.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T1_A4",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "A. General BIS Knowledge",
+    "query": "How can a consumer verify whether a product is BIS certified?",
+    "expected_behavior": "Should guide verifying ISI Mark / CRS registration and using BIS CARE App.",
+    "user_role": "consumer",
+    "target_standards": []
+  },
+  {
+    "id": "T1_A5",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "A. General BIS Knowledge",
+    "query": "What information is normally needed to determine which BIS standard applies to a product?",
+    "expected_behavior": "Should list product category, material, intended use, voltage/pressure rating, and industry domain.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T1_B6",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "B. Product -> Standard Discovery",
+    "query": "I manufacture stainless steel pressure cookers for household use in India. Which Indian Standard applies to my product?",
+    "expected_behavior": "Should identify IS 2347:2017.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T1_B7",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "B. Product -> Standard Discovery",
+    "query": "Which Indian Standard should I look at for domestic pressure cookers?",
+    "expected_behavior": "Should identify IS 2347:2017.",
+    "user_role": "consumer",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T1_B8",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "B. Product -> Standard Discovery",
+    "query": "I manufacture electric water heaters. What BIS standards should I investigate?",
+    "expected_behavior": "Should identify IS 2082:2018 for stationary electric storage water heaters.",
+    "user_role": "industry",
+    "target_standards": ["IS 2082:2018"]
+  },
+  {
+    "id": "T1_B9",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "B. Product -> Standard Discovery",
+    "query": "Which BIS standard is relevant to packaged drinking water?",
+    "expected_behavior": "Should identify IS 14543:2018 for packaged drinking water.",
+    "user_role": "consumer",
+    "target_standards": ["IS 14543:2018"]
+  },
+  {
+    "id": "T1_C10",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "C. Exact Standard / Document Lookup",
+    "query": "What products does IS 2347:2017 cover?",
+    "expected_behavior": "Should state domestic pressure cookers up to 10 liters nominal capacity made of aluminum or stainless steel.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T1_C11",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "C. Exact Standard / Document Lookup",
+    "query": "What is the title and scope of IS 2347:2017?",
+    "expected_behavior": "Should return Domestic Pressure Cookers Specification Fifth Revision and scope.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T1_C12",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "C. Exact Standard / Document Lookup",
+    "query": "What are the main requirements stated in the standard for domestic pressure cookers?",
+    "expected_behavior": "Should list food-grade material (Cl. 4.1), dual safety valves (Cl. 5.2), proof pressure 200 kPa (Cl. 7.3), bursting pressure (Cl. 8.1), and marking (Cl. 9.1).",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T1_D13",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "D. Basic Evidence",
+    "query": "Show me the source supporting your recommendation for the applicable pressure-cooker standard.",
+    "expected_behavior": "Should provide Bureau of Indian Standards e-BIS portal source and IS 2347:2017 details.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T1_D14",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "D. Basic Evidence",
+    "query": "Which clause in the retrieved standard supports the requirement you mentioned?",
+    "expected_behavior": "Should provide evidence hierarchy and clause verification principles.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T1_D15",
+    "tier": "Tier 1 — Foundation & Retrieval",
+    "category": "D. Basic Evidence",
+    "query": "Can you tell me the document title and page or section where this requirement appears?",
+    "expected_behavior": "Should cite IS document title, section, and page number verification structure.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_A1",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "A. Product Compliance Investigation",
+    "query": "I manufacture stainless steel pressure cookers for household use. Tell me the applicable BIS standard, whether certification is mandatory, whether a QCO applies, and the main compliance steps.",
+    "expected_behavior": "Should identify IS 2347:2017, confirm mandatory under DPIIT QCO 2020 (S.O. 3968(E)), Scheme-I ISI Mark, and STI testing steps.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T2_A2",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "A. Product Compliance Investigation",
+    "query": "I manufacture electric water heaters in India. What standards, certification requirements, testing requirements, and regulatory requirements should I consider?",
+    "expected_behavior": "Should identify IS 2082:2018, mandatory Scheme-I ISI mark under Electric Water Heaters QCO, and STI testing requirements.",
+    "user_role": "industry",
+    "target_standards": ["IS 2082:2018"]
+  },
+  {
+    "id": "T2_A3",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "A. Product Compliance Investigation",
+    "query": "I am planning to manufacture a product covered by an Indian Standard. Does following the standard automatically allow me to use the BIS Standard Mark?",
+    "expected_behavior": "Should clarify NO: applying the ISI mark legally requires obtaining a formal license (CM/L) under Scheme-I after factory audit.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_A4",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "A. Product Compliance Investigation",
+    "query": "What should a manufacturer verify before selling a product in India when a BIS standard may apply?",
+    "expected_behavior": "Should list verifying QCO mandatory status, obtaining BIS license, in-house STI testing, and marking requirements.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_B5",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "B. Clarification Handling",
+    "query": "What BIS certification do I need?",
+    "expected_behavior": "Should trigger clarification prompt asking for product type.",
+    "user_role": "consumer",
+    "target_standards": []
+  },
+  {
+    "id": "T2_B6",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "B. Clarification Handling",
+    "query": "Which BIS standard should I follow for my product?",
+    "expected_behavior": "Should ask clarification for specific product name.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_B7",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "B. Clarification Handling",
+    "query": "I manufacture a machine. Which Indian Standard applies?",
+    "expected_behavior": "Should request clarification regarding the specific machine type, voltage, or industrial application.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_B8",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "B. Clarification Handling",
+    "query": "Can you tell me whether my product requires BIS certification?",
+    "expected_behavior": "Should request product name to check QCO registries.",
+    "user_role": "consumer",
+    "target_standards": []
+  },
+  {
+    "id": "T2_C9",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "C. Consumer vs Industry Adaptation",
+    "query": "Industry: I manufacture packaged drinking water. What standards, certification requirements, testing requirements and regulatory requirements should I consider?",
+    "expected_behavior": "Should provide technical industry breakdown for packaged water (IS 14543:2018) with microbiological and STI testing rules.",
+    "user_role": "industry",
+    "target_standards": ["IS 14543:2018"]
+  },
+  {
+    "id": "T2_C10",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "C. Consumer vs Industry Adaptation",
+    "query": "Consumer: I bought packaged drinking water. What should I check to know whether it is properly BIS certified?",
+    "expected_behavior": "Should provide consumer-oriented instructions to verify the ISI mark with IS 14543 and 7-digit CM/L number on bottle cap/label.",
+    "user_role": "consumer",
+    "target_standards": ["IS 14543:2018"]
+  },
+  {
+    "id": "T2_C11",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "C. Consumer vs Industry Adaptation",
+    "query": "Consumer: I want to buy a pressure cooker. What BIS-related things should I check before purchasing?",
+    "expected_behavior": "Should instruct consumer to check for ISI Mark with IS 2347:2017, license number, and verify on BIS CARE App.",
+    "user_role": "consumer",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T2_D12",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "D. Semantic / Paraphrase Retrieval",
+    "query": "I make stainless steel vessels that cook food under pressure at home. What Indian Standard should I look at?",
+    "expected_behavior": "Semantic search should map paraphrase to IS 2347:2017.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T2_D13",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "D. Semantic / Paraphrase Retrieval",
+    "query": "What BIS requirement applies to domestic pressure-cooking equipment?",
+    "expected_behavior": "Should resolve to IS 2347:2017 requirements.",
+    "user_role": "consumer",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T2_D14",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "D. Semantic / Paraphrase Retrieval",
+    "query": "I produce household pressure vessels used for cooking. Help me identify the relevant standard.",
+    "expected_behavior": "Should map to IS 2347:2017.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T2_D15",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "D. Semantic / Paraphrase Retrieval",
+    "query": "What standard covers pressure cookers intended for normal household use?",
+    "expected_behavior": "Should map to IS 2347:2017.",
+    "user_role": "consumer",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T2_E16",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "E. QCO & Certification Reasoning",
+    "query": "If a QCO applies to my product, what does that mean for manufacturing and sale in India?",
+    "expected_behavior": "Should explain that manufacturing, importing, selling, or storing non-certified goods is prohibited by law.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_E17",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "E. QCO & Certification Reasoning",
+    "query": "What is the relationship between a QCO, an Indian Standard, and BIS certification?",
+    "expected_behavior": "Should explain IS defines technical specs, QCO makes standard legally mandatory, and Scheme-I grants the ISI mark licence.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T2_E18",
+    "tier": "Tier 2 — Reasoning, Clarification & Compliance",
+    "category": "E. QCO & Certification Reasoning",
+    "query": "How can I determine whether certification is mandatory or voluntary for a particular product?",
+    "expected_behavior": "Should explain checking line ministry QCO gazette notifications and BIS Product Certification schedule.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_A1",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "A. Hallucination / Fake Standard Tests",
+    "query": "What are the requirements under IS 99999:2035 for electric bicycles?",
+    "expected_behavior": "Should state clearly that IS 99999:2035 does not exist in authoritative BIS records.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_A2",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "A. Hallucination / Fake Standard Tests",
+    "query": "Tell me the scope and certification requirements of IS 12345:2099.",
+    "expected_behavior": "Should state that IS 12345:2099 is not a valid standard.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_A3",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "A. Hallucination / Fake Standard Tests",
+    "query": "According to IS 0000:2028, what testing procedure is mandatory?",
+    "expected_behavior": "Should reject fake standard IS 0000 without fabricating test procedures.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_B4",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "B. Fake / Unverified Clause Tests",
+    "query": "According to Clause 17.4 of the applicable standard, what testing procedure is required?",
+    "expected_behavior": "Should clarify that Clause 17.4 does not exist in the retrieved standard (or indicate lack of verified clause).",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_B5",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "B. Fake / Unverified Clause Tests",
+    "query": "Show me the exact evidence from Clause 99.9 supporting your answer.",
+    "expected_behavior": "Should state Clause 99.9 does not exist in the authoritative standard.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_B6",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "B. Fake / Unverified Clause Tests",
+    "query": "What does Clause 0.1 of the relevant standard require?",
+    "expected_behavior": "Should indicate that standard clauses start from Section/Clause 1.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_C7",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "C. Evidence-First Reasoning",
+    "query": "Why did you recommend this standard for my product? Show the specific evidence supporting the recommendation.",
+    "expected_behavior": "Should cite standard scope definition and product applicability terms.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_C8",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "C. Evidence-First Reasoning",
+    "query": "For every important conclusion in your answer, provide the supporting standard, clause, and page where available.",
+    "expected_behavior": "Should structure response with explicit clause and page citations.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_C9",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "C. Evidence-First Reasoning",
+    "query": "Which part of the source document supports your claim that certification is mandatory?",
+    "expected_behavior": "Should cite the DPIIT Quality Control Order gazette notification.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_C10",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "C. Evidence-First Reasoning",
+    "query": "Separate your AI interpretation from the authoritative source information.",
+    "expected_behavior": "Should distinguish verified standard excerpts from general guidance.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_D11",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "D. Ambiguity & Boundary Tests",
+    "query": "I manufacture a product. Tell me everything I need to know about BIS compliance.",
+    "expected_behavior": "Should request clarification regarding specific product type.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_D12",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "D. Ambiguity & Boundary Tests",
+    "query": "My product is a metal container. Which BIS standard applies?",
+    "expected_behavior": "Should ask whether it is a pressure cooker, gas cylinder, drum, or can.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_D13",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "D. Ambiguity & Boundary Tests",
+    "query": "I sell electrical equipment online. Do I need BIS certification?",
+    "expected_behavior": "Should explain that electrical items under QCO/CRO mandatory lists (e.g. IS 302, IS 1293, Scheme-II) require certification.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_D14",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "D. Ambiguity & Boundary Tests",
+    "query": "Is BIS certification mandatory for every product sold in India?",
+    "expected_behavior": "Should clarify NO: voluntary by default unless notified under a mandatory QCO by the Central Government.",
+    "user_role": "consumer",
+    "target_standards": []
+  },
+  {
+    "id": "T3_E15",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "E. Version / Amendment / Currentness Tests",
+    "query": "Is the standard you recommended still current, or has it been superseded or amended?",
+    "expected_behavior": "Should provide current revision year and active amendments list.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_E16",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "E. Version / Amendment / Currentness Tests",
+    "query": "What changed between the original standard and its latest amendment?",
+    "expected_behavior": "Should cite specific amendment notes and effective dates from database.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_E17",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "E. Version / Amendment / Currentness Tests",
+    "query": "Which version of the standard should a manufacturer rely on for current compliance?",
+    "expected_behavior": "Should state that the active revision along with all notified amendments is legally binding.",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_E18",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "E. Version / Amendment / Currentness Tests",
+    "query": "Are there related or superseding standards that I should also consider?",
+    "expected_behavior": "Should discuss related component standards (e.g. IS 21 for aluminum, IS 7466 for rubber gaskets).",
+    "user_role": "industry",
+    "target_standards": []
+  },
+  {
+    "id": "T3_F19",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "F. End-to-End Stress Test",
+    "query": "I am planning to manufacture stainless steel pressure cookers in India. Before I start selling them, tell me everything I need to know about the applicable Indian Standard, certification requirements, QCO applicability, testing requirements and compliance steps. For every important conclusion, show the supporting source and clause.",
+    "expected_behavior": "Should provide complete end-to-end regulatory roadmap for IS 2347:2017, QCO S.O. 3968(E), Scheme-I STI, Cl. 4.1/5.2/7.3/9.1 citations, and Manakonline licensing steps.",
+    "user_role": "industry",
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "T3_F20",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "F. End-to-End Stress Test",
+    "query": "I manufacture electric water heaters but I have not finalized the exact model or capacity. Determine what you can confidently establish, identify what remains uncertain, and tell me what additional information you need.",
+    "expected_behavior": "Should establish IS 2082:2018 electrical safety principles, identify unfinalized capacity as needing clarification, and state required details.",
+    "user_role": "industry",
+    "target_standards": ["IS 2082:2018"]
+  },
+  {
+    "id": "T3_F21",
+    "tier": "Tier 3 — Robustness, Grounding & Failure Resistance",
+    "category": "F. End-to-End Stress Test",
+    "query": "A supplier tells me that because our product follows an Indian Standard, BIS certification is automatically optional. Assess this statement using authoritative evidence and explain what would need to be verified.",
+    "expected_behavior": "Should debunk false claim: explain that if a product is covered by a Central Government QCO, compliance and BIS certification are legally mandatory under penalty of law.",
+    "user_role": "industry",
+    "target_standards": []
+  }
+]

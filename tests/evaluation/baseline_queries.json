@@ -1,0 +1,252 @@
+[
+  {
+    "id": "Q01",
+    "category": "GENERAL_BIS_KNOWLEDGE",
+    "query": "What is BIS certification and when is it required for a product in India?",
+    "user_role": "consumer",
+    "expected_behavior": "Should explain BIS role, Conformity Assessment Regulations, mandatory vs voluntary concepts, and Scheme-I/II basics.",
+    "retrieval_expected": false,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q02",
+    "category": "GENERAL_BIS_KNOWLEDGE",
+    "query": "What is the difference between an Indian Standard (IS) and a BIS certification scheme?",
+    "user_role": "industry",
+    "expected_behavior": "Should contrast technical specification documents (IS) with conformity assessment licensing procedures (Schemes).",
+    "retrieval_expected": false,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q03",
+    "category": "GENERAL_BIS_KNOWLEDGE",
+    "query": "What is a Quality Control Order (QCO) and which ministry issues it?",
+    "user_role": "industry",
+    "expected_behavior": "Should explain statutory QCOs issued by central line ministries under Section 16 of BIS Act, 2016.",
+    "retrieval_expected": false,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q04",
+    "category": "STANDARD_DISCOVERY",
+    "query": "Which Indian Standard specifies requirements for domestic pressure cookers?",
+    "user_role": "consumer",
+    "expected_behavior": "Should identify IS 2347:2017 with high confidence and mention mandatory ISI mark requirement.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "Q05",
+    "category": "STANDARD_DISCOVERY",
+    "query": "What standard covers low-voltage PVC insulated cables up to 1100V?",
+    "user_role": "industry",
+    "expected_behavior": "Should identify IS 694:2010.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 694:2010"]
+  },
+  {
+    "id": "Q06",
+    "category": "STANDARD_DISCOVERY",
+    "query": "Which standard applies to electric dry and steam irons?",
+    "user_role": "industry",
+    "expected_behavior": "Should identify IS 302-2-3:2021.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 302-2-3:2021"]
+  },
+  {
+    "id": "Q07",
+    "category": "STANDARD_DISCOVERY",
+    "query": "What Indian Standard applies to domestic plugs and socket-outlets?",
+    "user_role": "consumer",
+    "expected_behavior": "Should identify IS 1293:2019 for 6A and 16A configurations.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 1293:2019"]
+  },
+  {
+    "id": "Q08",
+    "category": "EXACT_STANDARD_LOOKUP",
+    "query": "IS 2347:2017",
+    "user_role": "industry",
+    "expected_behavior": "Should retrieve standard scope, title, committee MED 33, and clauses.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "Q09",
+    "category": "EXACT_STANDARD_LOOKUP",
+    "query": "What does IS 1293:2019 cover?",
+    "user_role": "industry",
+    "expected_behavior": "Should detail domestic plugs & socket outlets rated up to 250V and 16A.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 1293:2019"]
+  },
+  {
+    "id": "Q10",
+    "category": "EXACT_STANDARD_LOOKUP",
+    "query": "Tell me about IS 15652:2006",
+    "user_role": "industry",
+    "expected_behavior": "Should detail insulating mats for electrical switchboard applications up to 33 kV.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 15652:2006"]
+  },
+  {
+    "id": "Q11",
+    "category": "CLAUSE_LOOKUP",
+    "query": "What does Clause 5.2 of IS 2347 require for safety devices on pressure cookers?",
+    "user_role": "industry",
+    "expected_behavior": "Should quote two independent pressure relief devices: primary weight valve and secondary safety valve (130-200 kPa).",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "Q12",
+    "category": "CLAUSE_LOOKUP",
+    "query": "What are the leakage current limits in Clause 13.2 of IS 302-2-3 for electric irons?",
+    "user_role": "industry",
+    "expected_behavior": "Should extract 0.75 mA limit and 1000V AC dielectric strength requirement.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 302-2-3:2021"]
+  },
+  {
+    "id": "Q13",
+    "category": "CLAUSE_LOOKUP",
+    "query": "What does Clause 10.1 of IS 1293 say about shutter mechanisms?",
+    "user_role": "industry",
+    "expected_behavior": "Should quote shutter protection against electric shock preventing single-pin foreign object insertion.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 1293:2019"]
+  },
+  {
+    "id": "Q14",
+    "category": "PRODUCT_COMPLIANCE_INVESTIGATION",
+    "query": "I manufacture stainless steel pressure cookers for domestic use. What BIS certification do I need and what are the proof pressure requirements?",
+    "user_role": "industry",
+    "expected_behavior": "Should identify IS 2347:2017, mandatory Scheme-I ISI mark, and Clause 7.3 proof pressure (200 kPa for 10 min).",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "Q15",
+    "category": "PRODUCT_COMPLIANCE_INVESTIGATION",
+    "query": "We are setting up a manufacturing line for copper PVC cables. What in-house testing equipment and certification route are required?",
+    "user_role": "industry",
+    "expected_behavior": "Should specify IS 694:2010, Scheme-I STI, spark tester (6 kV AC), and conductor resistance bridge.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 694:2010"]
+  },
+  {
+    "id": "Q16",
+    "category": "REGULATORY_QCO_QUERY",
+    "query": "Is there a mandatory Quality Control Order applicable to domestic pressure cookers?",
+    "user_role": "industry",
+    "expected_behavior": "Should identify DPIIT Domestic Pressure Cooker (Quality Control) Order, 2020 (S.O. 3968(E)).",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 2347:2017"]
+  },
+  {
+    "id": "Q17",
+    "category": "REGULATORY_QCO_QUERY",
+    "query": "What is the enforcement date and notifying ministry for the Toys QCO?",
+    "user_role": "industry",
+    "expected_behavior": "Should identify DPIIT, Notification S.O. 3943(E), enforced 2021-01-01.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 9873 (Part 1):2019"]
+  },
+  {
+    "id": "Q18",
+    "category": "REGULATORY_QCO_QUERY",
+    "query": "Is BIS certification mandatory for PVC insulated cables in India?",
+    "user_role": "industry",
+    "expected_behavior": "Should confirm Mandatory under Cables and Wires QCO, 2023 (S.O. 4390(E)).",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 694:2010"]
+  },
+  {
+    "id": "Q19",
+    "category": "CONSUMER_QUERY",
+    "query": "How do I check if my electrical iron is BIS certified and safe for my home?",
+    "user_role": "consumer",
+    "expected_behavior": "Should instruct checking authentic ISI mark with 7-digit CM/L number via BIS CARE App.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 302-2-3:2021"]
+  },
+  {
+    "id": "Q20",
+    "category": "CONSUMER_QUERY",
+    "query": "Is it safe to buy a children's toy without the ISI mark?",
+    "user_role": "consumer",
+    "expected_behavior": "Should warn that ISI mark is legally mandatory under Toys QCO to ensure safety against choking and sharp edges.",
+    "retrieval_expected": true,
+    "citation_expected": true,
+    "target_standards": ["IS 9873 (Part 1):2019"]
+  },
+  {
+    "id": "Q21",
+    "category": "CLARIFICATION_REQUIRED",
+    "query": "What BIS certification do I need?",
+    "user_role": "consumer",
+    "expected_behavior": "Should flag needs_clarification=true and ask for specific product name without hallucinating.",
+    "retrieval_expected": false,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q22",
+    "category": "CLARIFICATION_REQUIRED",
+    "query": "How do I apply for a license?",
+    "user_role": "industry",
+    "expected_behavior": "Should request clarification regarding product or scheme category.",
+    "retrieval_expected": false,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q23",
+    "category": "OUT_OF_SCOPE",
+    "query": "What is the capital of France?",
+    "user_role": "consumer",
+    "expected_behavior": "Should indicate out-of-scope for BIS standards assistant or state lack of standard.",
+    "retrieval_expected": false,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q24",
+    "category": "OUT_OF_SCOPE_PRODUCT",
+    "query": "What Indian Standard applies to quantum teleportation devices on Mars?",
+    "user_role": "consumer",
+    "expected_behavior": "Should return zero standards, low confidence, and no hallucinated IS numbers.",
+    "retrieval_expected": true,
+    "citation_expected": false,
+    "target_standards": []
+  },
+  {
+    "id": "Q25",
+    "category": "FAKE_STANDARD_HALLUCINATION_TEST",
+    "query": "What are the requirements in IS 99999:2099 for flying automobiles?",
+    "user_role": "industry",
+    "expected_behavior": "Should clearly state that IS 99999:2099 does not exist in authoritative records.",
+    "retrieval_expected": true,
+    "citation_expected": false,
+    "target_standards": []
+  }
+]
