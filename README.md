@@ -1,54 +1,181 @@
 <div align="center">
 
 # 🏛️ ManakSetu (मानकसेतु)
-### AI-Powered Intelligent Assistant for Indian Standards & BIS Services
-**Smart India Hackathon (SIH26107)**
 
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI_0.115+-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![React](https://img.shields.io/badge/Frontend-React_18_|_TypeScript-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
-[![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS_3.4-38B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Qdrant](https://img.shields.io/badge/Vector_DB-Qdrant_1.19-DC2626.svg?style=for-the-badge&logo=qdrant&logoColor=white)](https://qdrant.tech)
-[![Python](https://img.shields.io/badge/Python-3.11_|_3.12_|_3.13-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![Benchmark](https://img.shields.io/badge/Evaluation_Score-54/54_Passed_(100%25)-10B981.svg?style=for-the-badge)](docs/status/TIER_EVALUATION_REPORT.md)
+### AI-Powered Assistant for Indian Standards, BIS Services & Compliance
 
-<p align="center">
-  <b>Bridging Indian Industry and Citizens with Authoritative Standards, Quality Control Orders (QCOs), and BIS Certification Routes.</b>
+<p>
+  <b>Helping users navigate Indian Standards, certification requirements, QCOs, and compliance information through evidence-grounded AI.</b>
 </p>
 
-[Key Features](#-key-features) • [System Architecture](#-system-architecture) • [3-Tier Benchmark](#-3-tier-evaluation-benchmark) • [Quick Start](#-quick-start--installation) • [API Reference](#-api-endpoints) • [Tech Stack](#-tech-stack)
+<br/>
 
----
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/Frontend-React_|_TypeScript-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Qdrant](https://img.shields.io/badge/Vector_DB-Qdrant-DC2626.svg?style=for-the-badge&logo=qdrant&logoColor=white)](https://qdrant.tech/)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Evaluation](https://img.shields.io/badge/Evaluation-54%2F54_Passed-10B981.svg?style=for-the-badge)](docs/status/TIER_EVALUATION_REPORT.md)
+
+<br/>
+
+[Features](#-what-is-manaksetu) •
+[Architecture](#-system-architecture) •
+[Evaluation](#-evaluation) •
+[Tech Stack](#️-technology-stack) •
+[Setup](#-getting-started) •
+[Roadmap](#-roadmap) •
+[License](#-license--authorship)
 
 </div>
 
-## 📌 Executive Overview
+---
 
-**ManakSetu (मानकसेतु)** is a full-stack, enterprise-grade AI compliance platform built for **SIH26107**. It democratizes access to dense regulatory standards published by the **Bureau of Indian Standards (BIS)** and Central Government Ministries.
+## 📌 What is ManakSetu?
 
-Whether you are a manufacturer navigating mandatory **Quality Control Orders (QCOs)** and **Scheme-I / Scheme-II (CRS)** factory testing protocols, or a consumer verifying an authentic **ISI Mark** and 7-digit **CM/L license number**, ManakSetu provides instant, verbatim-cited, zero-hallucination guidance.
+**ManakSetu (मानकसेतु)** is an experimental AI-powered assistant for navigating Indian Standards, BIS services, certification requirements, Quality Control Orders (QCOs), and related compliance information.
+
+The project started from a problem statement around making BIS information easier to access, but evolved into a personal exploration of a broader engineering question:
+
+> **How do you build a RAG system that can answer technical and compliance-oriented questions while remaining grounded in evidence and honest about uncertainty?**
+
+Instead of treating the problem as a simple chatbot, ManakSetu combines:
+
+- Query understanding
+- Intent and entity extraction
+- Hybrid retrieval
+- Semantic + keyword search
+- Reciprocal Rank Fusion (RRF)
+- Reranking
+- Compliance resolution
+- Evidence extraction
+- Citation-aware generation
+- Schema validation
+- Automated evaluation
+- Clarification handling
+
+The goal is not simply to generate an answer.
+
+The goal is to make the path from:
+
+**User Question → Relevant Information → Evidence → Answer**
+
+as explicit and reliable as possible.
 
 ---
 
-## ✨ Key Features
+## 🎯 The Problem
 
-### 1. 🖥️ AI-Native Dual-Pane Workspace
-- **Left / Center Pane**: Real-time markdown chat stream, confidence scoring badge (`HIGH`, `MEDIUM`, `LOW`), quick query chips, interactive checklists, and clickable citation pills.
-- **Right Context Inspector**: Synchronized secondary inspector containing:
-  - **Standards Viewer**: Search Indian Standards, view scope, active amendments, and browse clause-by-clause hierarchies with document page numbers.
-  - **Compliance & QCO Panel**: Gazette notifications, Line Ministry details (DPIIT, MoCA, MeitY, MOP), enforcement deadlines, and factory **Scheme of Testing & Inspection (STI)** roadmaps.
+Indian Standards and BIS-related information can be difficult to navigate because the information is distributed across technical standards, clauses, certification schemes, regulatory orders, and related documentation.
 
-### 2. 👥 Persona-Adaptive Reasoning Engine
+A user may know what they manufacture or want to purchase without knowing:
+
+- Which Indian Standard applies
+- Whether BIS certification is mandatory
+- Whether a QCO applies
+- Which certification scheme is relevant
+- Which requirements actually matter
+- Where a particular requirement appears in the source
+- Whether additional information is required before making a determination
+
+For example:
+
+> "I manufacture stainless-steel pressure cookers for household use. What BIS requirements do I need to consider before selling them in India?"
+
+This isn't simply a document search problem.
+
+The system has to understand the product, determine what information is relevant, retrieve supporting evidence, and distinguish between what is known and what remains uncertain.
+
+That is the problem ManakSetu is designed to explore.
+
+---
+
+# ✨ Core Features
+
+## 1. 🧠 Query Intelligence
+
+ManakSetu does not immediately send every question into vector search.
+
+The query is first analyzed for:
+
+- Intent
+- Product/entity information
+- Standard references
+- Compliance-related terminology
+- Ambiguity
+- Required clarification
+
+This allows the system to distinguish between questions such as:
+
+> "What is BIS certification?"
+
+and:
+
+> "Which BIS standard applies to my electric water heater?"
+
+These questions require different retrieval and reasoning paths.
+
+---
+
+## 2. 🔍 Hybrid Retrieval
+
+The retrieval layer combines two complementary approaches:
+
+### Semantic Retrieval
+Uses dense embeddings and Qdrant to find conceptually relevant content.
+
+### Keyword Retrieval
+Uses BM25 to preserve exact matches for:
+- Standard numbers
+- Clause references
+- Product terminology
+- Technical terms
+- Material names
+
+The two result sets are combined using **Reciprocal Rank Fusion (RRF)**.
+
+A heuristic reranking stage then considers additional signals such as exact standard references, product terms, materials, and clause identifiers.
+
+Conceptually:
+
+```text
+                 User Query
+                     │
+                     ▼
+             Query Understanding
+                     │
+              ┌──────┴──────┐
+              ▼             ▼
+        Semantic Search   BM25 Search
+              │             │
+              └──────┬──────┘
+                     ▼
+                 RRF Fusion
+                     │
+                     ▼
+                 Reranking
+                     │
+                     ▼
+              Relevant Evidence
+```
+
+---
+
+## 3. 👥 Persona-Adaptive Reasoning Engine
+
 - **🛡️ Consumer Mode**: Plain-language, safety-centric advice with step-by-step instructions on verifying the ISI Mark and CM/L license number via the **BIS CARE App**.
 - **⚡ Industry / Pro Mode**: Technical clause thresholds (e.g. proof pressure, leakage current limits, spark test voltages), laboratory setup requirements, and Manakonline licensing steps.
 
-### 3. 🔍 Hybrid Search & RRF Reranking
-- Combines **Qdrant 384-dimensional dense semantic vectors** with **BM25Okapi keyword matching** using **Reciprocal Rank Fusion (RRF)** ($k=60$).
-- Cross-feature heuristic reranker boosts exact standard numbers, product synonyms, materials, and specific clause references.
+---
 
-### 4. 📜 Authoritative Evidence Drawer
-- Clicking any citation pill opens a modal with the **verbatim clause excerpt**, document page, section identifier, copy button, and direct link to the official **e-BIS portal**.
+## 4. 📜 Authoritative Evidence Drawer
 
-### 5. 🛡️ Clarification Engine & Zero Hallucination
+Clicking any citation pill opens a modal with the **verbatim clause excerpt**, document page, section identifier, copy button, and direct link to the official **e-BIS portal**.
+
+---
+
+## 5. 🛡️ Clarification Engine & Zero Hallucination
+
 - Underspecified queries (e.g. *"What BIS certification do I need?"*) trigger an interactive clarification card with clickable product chips.
 - Non-existent standards (e.g. `IS 99999`) and fake clauses are **100% cleanly rejected**.
 
@@ -58,160 +185,112 @@ Whether you are a manufacturer navigating mandatory **Quality Control Orders (QC
 
 ```mermaid
 flowchart TD
-    User([User Query]) --> UI[React 18 + TypeScript Frontend]
-    UI --> API[FastAPI Backend /api/chat]
-    
-    subgraph Query Intelligence Layer
-        API --> QP[Query Parser & Entity Extractor]
-        QP --> IC[Intent Classifier]
-        QP --> AC{Ambiguous Query?}
-        AC -- Yes --> CP[Clarification Prompt]
-        CP --> UI
+    subgraph UI ["Modern Frontend (React + Vite + Tailwind)"]
+        UserQuery["User Natural Language Query"]
+        PersonaToggle["Persona Switcher (Consumer vs Industry)"]
+        ChatStream["Chat Area with Markdown & Citation Pills"]
+        InspectorSidebar["Standards & Compliance Inspector Panel"]
+        EvidenceModal["Authoritative Evidence Modal"]
     end
-    
-    subgraph Hybrid Retrieval Layer
-        AC -- No --> HS[Hybrid Searcher]
-        HS --> QD[(Qdrant Vector DB<br/>384-dim COSINE)]
-        HS --> BM25[(BM25Okapi<br/>Keyword Index)]
-        QD & BM25 --> RRF[Reciprocal Rank Fusion RRF]
-        RRF --> RR[Heuristic Reranker]
+
+    subgraph API ["FastAPI Gateway (backend/api)"]
+        ChatRouter["/api/chat (Pydantic Validation & Security)"]
+        StandardsRouter["/api/standards"]
+        ComplianceRouter["/api/compliance"]
     end
-    
-    subgraph Regulatory Compliance Layer
-        RR --> CR[Compliance Resolver]
-        CR --> RDB[(PostgreSQL / SQLite<br/>Standards, QCOs, Schemes)]
-        CR --> GK[General BIS Knowledge Base]
-        CR --> EPB[Evidence Pack Builder]
+
+    subgraph Core ["RAG Pipeline (backend/rag)"]
+        QueryClassifier["Query Classifier & Intent Analyzer"]
+        HybridSearch["Hybrid Search Engine"]
+        DenseVector["Qdrant Vector DB (384-d Cosine)"]
+        SparseBM25["Rank-BM25 Lexical Index"]
+        RRF["Reciprocal Rank Fusion (k=60)"]
+        Reranker["Cross-Feature Heuristic Reranker"]
+        LLMGenerator["Grounded LLM Generator (Anti-Hallucination Guardrails)"]
+        ConfidenceScorer["Deterministic Confidence Evaluator"]
     end
-    
-    subgraph Synthesis & Guardrail Layer
-        EPB --> CS[Confidence & Citation Scorer]
-        CS --> GEN[LLM / Deterministic Generator]
-        GEN --> VAL[Pydantic Schema Validation]
-        VAL --> UI
+
+    subgraph DB ["Data & Storage Layer"]
+        SQLStore["Relational DB (SQLite / PostgreSQL via SQLAlchemy)"]
+        QdrantStore["Qdrant Vector Store (./data/qdrant)"]
+        DocCorpus["Indexed Indian Standards & Gazette QCOs"]
     end
+
+    UserQuery --> ChatRouter
+    PersonaToggle --> ChatRouter
+    ChatRouter --> QueryClassifier
+    QueryClassifier --> HybridSearch
+    HybridSearch --> DenseVector & SparseBM25
+    DenseVector & SparseBM25 --> RRF --> Reranker
+    Reranker --> LLMGenerator
+    LLMGenerator --> ConfidenceScorer
+    ConfidenceScorer --> ChatStream
+    ChatStream --> InspectorSidebar & EvidenceModal
+    DenseVector --> QdrantStore
+    StandardsRouter --> SQLStore
+    ComplianceRouter --> SQLStore
 ```
 
 ---
 
-## 📊 3-Tier Evaluation Benchmark
+## 🧪 Evaluation
 
-ManakSetu was rigorously evaluated against the official **54-question 3-tier benchmark** covering foundational retrieval, compliance reasoning, and adversarial stress testing:
+ManakSetu includes a dedicated 3-tier automated evaluation benchmark covering:
+- **Tier 1 (Factual & Retrieval Accuracy)**: Clause lookups, standard matching, QCO mandatory status.
+- **Tier 2 (Persona Adaptation & Compliance)**: Consumer verification instructions vs manufacturer STI checklists.
+- **Tier 3 (Edge Cases & Hallucination Resistance)**: Non-existent IS numbers, out-of-domain queries, and prompt injection probes.
 
-| Tier | Focus Area | Questions | Pre-Optimization | Post-Optimization | Status |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **Tier 1** | **Foundation & Retrieval** | 15 | 40.0% (6/15) | **100.0% (15/15)** | 🏆 **Passed** |
-| **Tier 2** | **Reasoning & Compliance** | 18 | 44.4% (8/18) | **100.0% (18/18)** | 🏆 **Passed** |
-| **Tier 3** | **Robustness & Resistance** | 21 | 52.4% (11/21) | **100.0% (21/21)** | 🏆 **Passed** |
-| **OVERALL** | **Complete Benchmark Suite** | **54** | **46.3% (25/54)** | **100.0% (54/54)** | 🏆 **100% Mastered** |
-
-- **Average Query Latency**: `158.8 ms`
-- **Hallucination Rate**: `0.0%`
-- Detailed Report: [`docs/status/TIER_EVALUATION_REPORT.md`](docs/status/TIER_EVALUATION_REPORT.md)
+| Metric | Result | Status |
+| :--- | :--- | :--- |
+| **Total Test Suite** | 54 / 54 Questions | **100.0% Pass Rate** |
+| **Zero-Hallucination Resistance** | 100.0% | **Passed** |
+| **Average Query Latency** | ~506ms (p50) / ~619ms (p95) | **Optimized** |
 
 ---
 
-## 📂 Project Directory Structure
+## 🛠️ Technology Stack
 
-```
-BIS-IntelliAssist/
-├── backend/
-│   ├── api/                  # FastAPI REST Endpoints (/api/chat, /api/standards, etc.)
-│   ├── config/               # Settings & Pydantic Environment Configuration
-│   ├── database/             # SQLAlchemy Relational Models & Session Manager
-│   ├── ingestion/            # Structure-Aware Chunker, Embedder & Qdrant Indexer
-│   ├── knowledge/            # Curated Standards, QCOs, Schemes, General Knowledge
-│   ├── migrations/           # Alembic Database Migration Scripts
-│   ├── rag/                  # Parser, Classifier, Hybrid Search, Reranker, Generator
-│   ├── tests/                # Automated Pytest Suite (23 passed tests)
-│   └── main.py               # FastAPI Server Entrypoint
-├── frontend/
-│   ├── src/
-│   │   ├── components/       # Layout, Chat, Standards, Compliance, Evidence Drawers
-│   │   ├── context/          # Global React Assistant State Context
-│   │   ├── services/         # Strictly Typed API Client Layer with Zod Validation
-│   │   ├── types/            # TypeScript Interfaces & Zod Schemas
-│   │   ├── App.tsx           # Dual-Pane Responsive Layout Shell
-│   │   └── main.tsx          # React Root Entrypoint
-│   ├── index.html            # HTML Shell with Google Fonts
-│   ├── package.json          # Frontend Dependencies & Scripts
-│   ├── tailwind.config.js    # Curated BIS Navy & Gold Theme Tokens
-│   └── vite.config.ts        # Vite Dev Server & Backend Proxy
-├── docs/
-│   ├── status/               # Evaluation Reports & Diagnostic Audits
-│   ├── BACKEND_STATUS.md     # Phase 3A Backend Status
-│   └── FRONTEND_STATUS.md    # Phase 3B Frontend Status
-├── tests/evaluation/         # 3-Tier Evaluation Harness & Baseline JSON
-├── .gitignore                # Production Git Ignore File
-└── README.md                 # Project Documentation
-```
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 18, TypeScript, Vite 6, Tailwind CSS 3.4, Lucide React, React Markdown, Remark GFM, Zod |
+| **Backend** | FastAPI, Python 3.11+, Pydantic v2, SQLAlchemy ORM, Alembic, Uvicorn |
+| **Databases** | PostgreSQL / SQLite (Relational), Qdrant (Persistent Dense Vector Store) |
+| **RAG & Search** | PyMuPDF (PDF Parser), Sentence-Transformers, Rank-BM25, Reciprocal Rank Fusion (RRF) |
+| **Evaluation** | Pytest, Custom 54-Question 3-Tier Automated Telemetry Harness |
 
 ---
 
-## 🚀 Quick Start & Installation
+## 🚀 Getting Started
 
 ### 1. Prerequisites
-- **Python**: `3.11` or higher
-- **Node.js**: `v18.0.0` or higher (`v20+` recommended)
-- **Git**
+- **Python 3.11+**
+- **Node.js 18+** & **npm**
 
----
-
-### 2. Clone the Repository
+### 2. Setup
 ```bash
-git clone https://github.com/your-username/manaksetu.git
-cd manaksetu
-```
+# Clone the repository
+git clone https://github.com/lazy0ne369/ManakSetu.git
+cd ManakSetu
 
----
-
-### 3. Backend Setup
-```bash
-# Create and activate Python virtual environment
+# Setup backend
 python -m venv venv
-
-# On Windows:
 .\venv\Scripts\activate
-# On Linux/macOS:
-source venv/bin/activate
-
-# Install dependencies
 pip install -r backend/requirements.txt
-
-# Run database migrations and seed data
 alembic upgrade head
 python -m backend.knowledge.seed_data
 
-# Start FastAPI backend server
+# Start backend server
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-*Backend runs on **http://127.0.0.1:8000** (Swagger API Docs: **http://127.0.0.1:8000/docs**)*.
 
----
-
-### 4. Frontend Setup
-In a new terminal:
+In a second terminal:
 ```bash
+# Setup and start frontend
 cd frontend
-
-# Install Node dependencies
 npm install
-
-# Start Vite development server
 npm run dev
 ```
-*Frontend runs on **http://localhost:5173/** (or **http://127.0.0.1:5173/**)*.
-
----
-
-### 5. Running Automated Tests & Benchmark
-```bash
-# Run backend pytest suite (23 unit/integration tests)
-pytest -v
-
-# Run the 54-question 3-tier benchmark
-python -m tests.evaluation.run_tier_evaluation
-```
+*Frontend runs at **http://127.0.0.1:5173/** (Backend Swagger at **http://127.0.0.1:8000/docs**)*.
 
 ---
 
@@ -230,18 +309,6 @@ python -m tests.evaluation.run_tier_evaluation
 
 ---
 
-## 🛠️ Tech Stack
-
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend** | React 18, TypeScript, Vite 6, Tailwind CSS 3.4, Lucide React, React Markdown, Remark GFM, Zod |
-| **Backend** | FastAPI, Python 3.11+, Pydantic v2, SQLAlchemy ORM, Alembic, Uvicorn |
-| **Databases** | PostgreSQL / SQLite (Relational), Qdrant (Persistent Dense Vector Store) |
-| **RAG & Search** | PyMuPDF (PDF Parser), Sentence-Transformers, Rank-BM25, Reciprocal Rank Fusion (RRF) |
-| **Evaluation** | Pytest, Custom 54-Question 3-Tier Automated Telemetry Harness |
-
----
-
 ## 📜 License & Authorship
 
 This project is licensed under the **MIT License** — see the [LICENSE](file:///d:/BIS-IntelliAssist/LICENSE) file for details.
@@ -251,4 +318,3 @@ This project is licensed under the **MIT License** — see the [LICENSE](file://
 - **Domain**: AI Compliance Assistant for the Bureau of Indian Standards (BIS)
 
 All technical specifications and citations conform strictly to the published normative documents of the **Bureau of Indian Standards (BIS)** and the **Ministry of Consumer Affairs, Food & Public Distribution, Government of India**.
-
