@@ -4,47 +4,75 @@
 
 @layer base {
   * {
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: #242630;
   }
   
   body {
-    background-color: #070c18;
-    color: #f1f5f9;
+    background-color: #070709;
+    color: #e4e5eb;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Custom scrollbar */
+  /* Minimal clean scrollbar with subtle carbon tone */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: #252733;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: #393c4e;
   }
 }
 
 @layer utilities {
-  .glass-panel {
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  
-  .glass-card {
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+  .layer-abyss {
+    background-color: #070709;
   }
 
-  .glass-card:hover {
-    background: rgba(30, 41, 59, 0.85);
-    border-color: rgba(14, 140, 228, 0.35);
+  .layer-base {
+    background-color: #0d0e12;
+    border: 1px solid #1e2029;
+  }
+
+  .layer-panel {
+    background-color: #121318;
+    border: 1px solid #232530;
+  }
+
+  .layer-card {
+    background-color: #181920;
+    border: 1px solid #282a36;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .layer-card:hover {
+    background-color: #1f202a;
+    border-color: #373948;
+  }
+
+  .layer-nested {
+    background-color: #14151b;
+    border: 1px solid #232530;
+  }
+
+  .layer-elevated {
+    background-color: #22232e;
+    border: 1px solid #333544;
+  }
+
+  .layer-input {
+    background-color: #13141a;
+    border: 1px solid #282a36;
+  }
+
+  .layer-input:focus-within {
+    border-color: #4a4d60;
+    box-shadow: 0 0 0 1px rgba(100, 105, 130, 0.15);
   }
 }

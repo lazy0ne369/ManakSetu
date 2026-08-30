@@ -7,17 +7,13 @@ import { submitFeedback } from '../../services/sourceService';
 import { ClarificationPrompt } from './ClarificationPrompt';
 import {
   ShieldCheck,
-  Building,
   CheckCircle2,
   ListOrdered,
   FileText,
   ExternalLink,
   ThumbsUp,
   ThumbsDown,
-  Sparkles,
   Award,
-  AlertTriangle,
-  Info,
 } from 'lucide-react';
 
 interface MessageBubbleProps {
@@ -25,7 +21,7 @@ interface MessageBubbleProps {
 }
 
 export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
-  const { inspectStandard, inspectCitation, userRole } = useAssistant();
+  const { inspectStandard, inspectCitation } = useAssistant();
   const [feedbackRating, setFeedbackRating] = useState<number | null>(null);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState<boolean>(false);
 
@@ -46,13 +42,13 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
 
   if (isUser) {
     return (
-      <div className="flex justify-end my-4 animate-fade-in">
-        <div className="max-w-2xl bg-gradient-to-r from-bis-600 to-bis-700 text-white rounded-2xl rounded-tr-sm px-5 py-3.5 shadow-md shadow-bis-900/30">
-          <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-          <div className="flex items-center justify-end gap-1.5 mt-1.5 text-[11px] text-bis-200">
+      <div className="flex justify-end my-3 animate-fade-in">
+        <div className="max-w-2xl bg-[#21232e] text-[#f1f2f8] border border-[#343748] rounded-2xl px-4 py-3 shadow-sm">
+          <p className="text-sm leading-relaxed whitespace-pre-wrap font-sans">{message.content}</p>
+          <div className="flex items-center justify-end gap-2 mt-1.5 text-[10px] text-[#8c8f9f] font-mono">
             <span>{message.timestamp}</span>
             {message.userRole && (
-              <span className="uppercase text-[9px] font-bold px-1.5 py-0.5 rounded bg-black/20">
+              <span className="uppercase font-semibold px-1.5 py-0.2 rounded bg-[#161822] text-[#b4b7cb] border border-[#2d3040]">
                 {message.userRole}
               </span>
             )}
@@ -65,33 +61,33 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const confidence = payload?.confidence || 'medium';
   const confidenceConfig = {
     high: {
-      color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
-      label: 'High Factual Confidence (Verified Standard & QCO)',
+      color: 'text-emerald-400 bg-emerald-950/40 border-emerald-800/60',
+      label: 'Verified Official Standard & QCO Match',
     },
     medium: {
-      color: 'text-amber-400 bg-amber-500/10 border-amber-500/30',
-      label: 'Medium Confidence (Standard Match)',
+      color: 'text-amber-400 bg-amber-950/40 border-amber-800/60',
+      label: 'Standard Identified (General Match)',
     },
     low: {
-      color: 'text-slate-400 bg-slate-500/10 border-slate-500/30',
-      label: 'Low Confidence (General / Clarification Needed)',
+      color: 'text-[#8c8f9f] bg-[#1a1b24] border-[#2d303f]',
+      label: 'General / Clarification Needed',
     },
   }[confidence];
 
   return (
-    <div className="flex flex-col my-4 max-w-4xl animate-fade-in">
-      <div className="glass-card rounded-2xl rounded-tl-sm p-5 border border-slate-800 shadow-xl space-y-4">
-        {/* Header with AI Persona & Confidence indicator */}
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+    <div className="flex flex-col my-3 max-w-4xl animate-fade-in">
+      <div className="bg-[#121319] rounded-2xl p-5 border border-[#222430] shadow-sm space-y-4">
+        {/* Header with Assistant Persona & Confidence indicator */}
+        <div className="flex items-center justify-between border-b border-[#20222e] pb-3">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-bis-600/20 text-bis-400 border border-bis-500/30">
+            <div className="p-1 rounded-md bg-[#1c1e27] text-[#d4d7e6] border border-[#2d3040]">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-xs font-bold text-white tracking-wide">
-                ManakSetu AI Assistant
+              <span className="text-xs font-semibold text-[#f1f2f8] tracking-wide font-sans">
+                ManakSetu AI
               </span>
-              <span className="text-[11px] text-slate-400 ml-2">
+              <span className="text-[10px] text-[#7d8092] ml-2 font-mono">
                 {message.timestamp}
               </span>
             </div>
@@ -99,158 +95,167 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
 
           {payload && (
             <div
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border ${confidenceConfig.color}`}
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-medium border ${confidenceConfig.color}`}
               title={confidenceConfig.label}
             >
-              <Sparkles className="w-3 h-3" />
-              <span className="uppercase font-semibold tracking-wider text-[10px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-current" />
+              <span className="uppercase font-semibold tracking-wider font-mono">
                 {confidence} Confidence
               </span>
             </div>
           )}
         </div>
 
-        {/* Clarification prompt if triggered */}
+        {/* Ambiguity / Clarification Prompt Card if required */}
         {payload?.needs_clarification && payload.clarification_question && (
           <ClarificationPrompt question={payload.clarification_question} />
         )}
 
-        {/* Main Text Content (Markdown) */}
-        <div className="prose prose-invert prose-sm max-w-none text-slate-200 leading-relaxed">
+        {/* Main Markdown Text Response */}
+        <div className="text-sm text-[#e4e5eb] leading-relaxed font-sans prose prose-invert max-w-none prose-p:my-2 prose-headings:text-[#f1f2f8] prose-headings:font-semibold prose-headings:text-sm prose-li:my-0.5 prose-strong:text-[#f1f2f8]">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {message.content}
+            {payload?.answer || message.content}
           </ReactMarkdown>
         </div>
 
-        {/* Applicable Standards Quick Chips */}
+        {/* Structured Data: Applicable Standards Chips */}
         {payload?.applicable_standards && payload.applicable_standards.length > 0 && (
-          <div className="space-y-2 pt-2 border-t border-slate-800/80">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-bis-300">
-              <Award className="w-3.5 h-3.5" />
-              <span>Applicable Indian Standards (Click to Inspect Clauses):</span>
+          <div className="space-y-2 pt-1 border-t border-[#20222e]">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#c5c8d8]">
+              <Award className="w-3.5 h-3.5 text-[#8c8f9f]" />
+              <span>Applicable Indian Standards:</span>
             </div>
-            <div className="flex flex-wrap gap-2">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {payload.applicable_standards.map((std, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => inspectStandard(std.is_number)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-bis-950/80 border border-bis-500/30 hover:border-bis-400 text-left transition-all group"
-                >
-                  <span className="font-mono text-xs font-bold text-bis-300 group-hover:text-bis-200">
-                    {std.is_number}
-                  </span>
-                  <span className="text-xs text-slate-300 max-w-[200px] truncate">
-                    {std.title}
-                  </span>
-                  {std.mandatory && (
-                    <span className="px-1.5 py-0.5 rounded text-[9px] uppercase font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                      Mandatory
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Key Technical Requirements / Checklist */}
-        {payload?.key_requirements && payload.key_requirements.length > 0 && (
-          <div className="space-y-2 pt-2 border-t border-slate-800/80">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-300">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Key Standard & Testing Requirements:</span>
-            </div>
-            <ul className="grid grid-cols-1 gap-1.5 text-xs text-slate-300">
-              {payload.key_requirements.map((req, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-2 p-2 rounded-lg bg-slate-900/50 border border-slate-800/60"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                  <span className="leading-relaxed">{req}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Compliance Roadmap Steps */}
-        {payload?.compliance_steps && payload.compliance_steps.length > 0 && (
-          <div className="space-y-2 pt-2 border-t border-slate-800/80">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-sky-300">
-              <ListOrdered className="w-3.5 h-3.5" />
-              <span>
-                {userRole === 'industry'
-                  ? 'BIS Licensing & Compliance Steps (STI):'
-                  : 'Consumer Safety & Verification Checklist:'}
-              </span>
-            </div>
-            <div className="space-y-1.5 text-xs text-slate-300">
-              {payload.compliance_steps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="p-2 rounded-lg bg-slate-900/60 border border-slate-800/60 leading-relaxed font-sans"
+                  onClick={() => inspectStandard(std.is_number)}
+                  className="p-3 rounded-xl bg-[#171922] hover:bg-[#20222e] border border-[#272a38] hover:border-[#3c4054] cursor-pointer transition-all space-y-1.5 group"
                 >
-                  {step}
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-[#f1f2f8] group-hover:text-white">
+                      {std.is_number}
+                    </span>
+                    <span
+                      className={`text-[9px] uppercase font-semibold px-1.5 py-0.5 rounded border ${
+                        std.mandatory
+                          ? 'bg-rose-950/40 text-rose-300 border-rose-800/60'
+                          : 'bg-[#222430] text-[#a4a8bc] border-[#343746]'
+                      }`}
+                    >
+                      {std.mandatory ? 'Mandatory QCO' : 'Voluntary'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#c5c8d8] line-clamp-2">{std.title}</p>
+                  <div className="flex items-center justify-between text-[10px] text-[#7d8092] pt-0.5">
+                    <span>{std.certification_scheme || 'Scheme-I (ISI Mark)'}</span>
+                    <span className="text-[#a4a8bc] group-hover:underline flex items-center gap-0.5">
+                      Inspect <ExternalLink className="w-2.5 h-2.5" />
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Verified Citations & Evidence Drawer Trigger */}
+        {/* Structured Data: Key Requirements & STI Steps in Minimalist Containers */}
+        {((payload?.key_requirements && payload.key_requirements.length > 0) ||
+          (payload?.compliance_steps && payload.compliance_steps.length > 0)) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 pt-1">
+            {payload.key_requirements && payload.key_requirements.length > 0 && (
+              <div className="p-3.5 rounded-xl bg-[#161720] border border-[#252836] space-y-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#c5c8d8]">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#8c8f9f]" />
+                  <span>Key Technical Requirements:</span>
+                </div>
+                <ul className="space-y-1 text-xs text-[#b4b7cb]">
+                  {payload.key_requirements.map((req, idx) => (
+                    <li key={idx} className="flex items-start gap-1.5">
+                      <span className="text-[#64677a] font-mono text-[10px] mt-0.5">•</span>
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {payload.compliance_steps && payload.compliance_steps.length > 0 && (
+              <div className="p-3.5 rounded-xl bg-[#161720] border border-[#252836] space-y-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#c5c8d8]">
+                  <ListOrdered className="w-3.5 h-3.5 text-[#8c8f9f]" />
+                  <span>Compliance & Licensing Steps:</span>
+                </div>
+                <ol className="space-y-1 text-xs text-[#b4b7cb]">
+                  {payload.compliance_steps.map((step, idx) => (
+                    <li key={idx} className="flex items-start gap-1.5">
+                      <span className="font-mono text-[#7d8092] text-[10px] mt-0.5">
+                        {idx + 1}.
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Citations & Provenance Pills */}
         {payload?.sources && payload.sources.length > 0 && (
-          <div className="space-y-2 pt-2 border-t border-slate-800/80">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-400">
-              <FileText className="w-3.5 h-3.5" />
-              <span>Authoritative Citations (Click to view clause text):</span>
+          <div className="pt-2 border-t border-[#20222e] space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-[#8c8f9f]">
+              <FileText className="w-3.5 h-3.5 text-[#7d8092]" />
+              <span>Authoritative Citations & Source Evidence:</span>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {payload.sources.map((cit, idx) => (
+
+            <div className="flex flex-wrap gap-1.5">
+              {payload.sources.map((cit: CitationItem, idx: number) => (
                 <button
                   key={idx}
                   onClick={() => inspectCitation(cit)}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-[11px] font-mono transition-colors"
-                  title="Click to view verbatim standard clause excerpt"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#181a23] hover:bg-[#222432] border border-[#2b2e3e] hover:border-[#43475e] text-[#c5c8d8] hover:text-white text-xs transition-all font-mono shadow-sm"
+                  title="Click to view verbatim excerpt in Evidence Drawer"
                 >
-                  <span className="text-bis-400 font-semibold">{cit.standard}</span>
-                  {cit.clause && <span className="text-slate-400">Cl. {cit.clause}</span>}
-                  {cit.page && <span className="text-slate-500">p.{cit.page}</span>}
-                  <ExternalLink className="w-3 h-3 text-slate-500 ml-0.5" />
+                  <span className="font-semibold text-[#e4e5eb]">
+                    [{cit.standard} {cit.clause ? `Cl. ${cit.clause}` : ''}]
+                  </span>
+                  {cit.page && <span className="text-[#7d8092] text-[10px]">p.{cit.page}</span>}
                 </button>
               ))}
             </div>
           </div>
         )}
 
-        {/* User Feedback & Rating Bar */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs text-slate-400">
+        {/* Footer with Feedback Controls */}
+        <div className="flex items-center justify-between pt-2 border-t border-[#20222e] text-[11px] text-[#7d8092]">
+          <span>Official Bureau of Indian Standards Intelligence</span>
+
           <div className="flex items-center gap-2">
-            <span>Was this answer accurate & helpful?</span>
+            <span className="text-[10px]">Was this helpful?</span>
             <button
-              onClick={() => handleFeedback(5)}
+              onClick={() => handleFeedback(1)}
               disabled={feedbackSubmitted}
-              className={`p-1.5 rounded-lg hover:bg-slate-800 transition-colors ${
-                feedbackRating === 5 ? 'text-emerald-400 bg-emerald-500/20' : 'text-slate-400'
+              className={`p-1 rounded hover:bg-[#20222e] transition-colors ${
+                feedbackRating === 1 ? 'text-[#f1f2f8]' : 'text-[#7d8092] hover:text-[#e4e5eb]'
               }`}
               title="Helpful"
             >
               <ThumbsUp className="w-3.5 h-3.5" />
             </button>
             <button
-              onClick={() => handleFeedback(1)}
+              onClick={() => handleFeedback(-1)}
               disabled={feedbackSubmitted}
-              className={`p-1.5 rounded-lg hover:bg-slate-800 transition-colors ${
-                feedbackRating === 1 ? 'text-rose-400 bg-rose-500/20' : 'text-slate-400'
+              className={`p-1 rounded hover:bg-[#20222e] transition-colors ${
+                feedbackRating === -1 ? 'text-[#f1f2f8]' : 'text-[#7d8092] hover:text-[#e4e5eb]'
               }`}
               title="Not helpful"
             >
               <ThumbsDown className="w-3.5 h-3.5" />
             </button>
             {feedbackSubmitted && (
-              <span className="text-[11px] text-emerald-400 font-medium">
-                Thank you for your feedback!
-              </span>
+              <span className="text-[10px] text-[#a4a8bc] font-mono ml-1">Feedback saved</span>
             )}
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAssistant } from '../../context/AssistantContext';
 import {
-  FileText,
   X,
   ExternalLink,
   ShieldCheck,
@@ -27,52 +26,52 @@ export const EvidenceDrawer: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="w-full max-w-xl glass-card rounded-3xl border border-bis-500/40 p-6 space-y-4 shadow-2xl animate-slide-up relative bg-slate-950/95">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fade-in">
+      <div className="w-full max-w-xl bg-[#13141b] rounded-2xl border border-[#272937] p-6 space-y-4 shadow-2xl animate-slide-up relative text-[#e4e5eb]">
         {/* Close Button */}
         <button
           onClick={closeEvidenceDrawer}
-          className="absolute right-5 top-5 p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+          className="absolute right-5 top-5 p-1.5 rounded-lg bg-[#1a1c26] hover:bg-[#252735] text-[#8c8f9f] hover:text-white border border-[#2c2e3e] transition-colors"
           title="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {/* Header */}
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-2xl bg-bis-600/20 text-bis-400 border border-bis-500/30">
-            <ShieldCheck className="w-6 h-6" />
+          <div className="p-2 rounded-lg bg-[#1a1c26] text-[#d4d7e6] border border-[#2c2e3e]">
+            <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-white font-mono">
+              <h3 className="text-sm font-bold text-[#f1f2f8] font-mono">
                 {activeCitation.standard}
               </h3>
-              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
-                Authoritative BIS Clause
+              <span className="text-[10px] uppercase font-mono font-medium px-1.5 py-0.5 rounded bg-[#20222e] text-[#c5c8d8] border border-[#303344]">
+                Authoritative Source
               </span>
             </div>
-            <p className="text-xs text-slate-400">
-              Verified citation from indexed Indian Standard database
+            <p className="text-[11px] text-[#7d8092]">
+              Verified citation from indexed Bureau of Indian Standards corpus
             </p>
           </div>
         </div>
 
         {/* Metadata Details */}
-        <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
+        <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-[#171822] border border-[#262836] text-xs">
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-semibold">Clause</span>
-            <span className="font-mono font-bold text-bis-300">
+            <span className="text-[#64677a] block text-[10px] uppercase font-semibold">Clause</span>
+            <span className="font-mono font-bold text-[#f1f2f8]">
               {activeCitation.clause || 'General'}
             </span>
           </div>
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-semibold">Section</span>
-            <span className="font-mono text-slate-200">{activeCitation.section || '—'}</span>
+            <span className="text-[#64677a] block text-[10px] uppercase font-semibold">Section</span>
+            <span className="font-mono text-[#c5c8d8]">{activeCitation.section || '—'}</span>
           </div>
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-semibold">Document Page</span>
-            <span className="font-mono text-slate-200">
+            <span className="text-[#64677a] block text-[10px] uppercase font-semibold">Document Page</span>
+            <span className="font-mono text-[#c5c8d8]">
               {activeCitation.page ? `Page ${activeCitation.page}` : '—'}
             </span>
           </div>
@@ -80,28 +79,28 @@ export const EvidenceDrawer: React.FC = () => {
 
         {/* Verbatim Excerpt */}
         <div className="space-y-1.5">
-          <div className="flex items-center justify-between text-xs font-semibold text-slate-300">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#c5c8d8]">
             <span className="flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5 text-bis-400" />
-              <span>Verbatim Clause Text:</span>
+              <BookOpen className="w-3.5 h-3.5 text-[#8c8f9f]" />
+              <span>Verbatim Standard Excerpt:</span>
             </span>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-slate-200 transition-colors"
+              className="flex items-center gap-1 text-[11px] text-[#8c8f9f] hover:text-[#f1f2f8] transition-colors"
             >
               {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
               <span>{copied ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-200 leading-relaxed font-mono whitespace-pre-wrap max-h-60 overflow-y-auto">
+          <div className="p-4 rounded-xl bg-[#0c0d12] border border-[#21232f] text-xs text-[#e4e5eb] leading-relaxed font-mono whitespace-pre-wrap max-h-60 overflow-y-auto">
             {activeCitation.excerpt || 'Full clause text verified in BIS knowledge base.'}
           </div>
         </div>
 
         {/* Footer actions */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-800/80">
-          <span className="text-[11px] text-slate-500">
+        <div className="flex items-center justify-between pt-2 border-t border-[#20222e]">
+          <span className="text-[11px] text-[#7d8092]">
             Source: Bureau of Indian Standards (BIS)
           </span>
 
@@ -111,15 +110,15 @@ export const EvidenceDrawer: React.FC = () => {
                 href={activeCitation.source_url}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-bis-600 hover:bg-bis-500 text-white text-xs font-semibold shadow-md shadow-bis-600/30 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#e4e5eb] hover:bg-white text-[#0e0f14] text-xs font-semibold shadow-sm transition-colors"
               >
                 <span>Verify on e-BIS Portal</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-3 h-3" />
               </a>
             )}
             <button
               onClick={closeEvidenceDrawer}
-              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-colors"
+              className="px-3 py-1.5 rounded-lg bg-[#1a1c26] hover:bg-[#252735] text-[#c5c8d8] text-xs font-medium transition-colors border border-[#2b2e3e]"
             >
               Close
             </button>

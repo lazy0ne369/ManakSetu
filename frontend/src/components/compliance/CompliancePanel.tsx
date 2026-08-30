@@ -4,15 +4,11 @@ import {
   ShieldAlert,
   FileBadge,
   CheckCircle,
-  Building,
   ExternalLink,
-  HelpCircle,
-  Clock,
-  Layers,
 } from 'lucide-react';
 
 export const CompliancePanel: React.FC = () => {
-  const { selectedStandard, userRole } = useAssistant();
+  const { selectedStandard } = useAssistant();
   const [activeTab, setActiveTab] = useState<'qco' | 'schemes' | 'sti'>('qco');
 
   const qcos = selectedStandard?.qcos || [];
@@ -21,14 +17,14 @@ export const CompliancePanel: React.FC = () => {
     {
       id: 'Scheme-I',
       name: 'Product Certification Scheme (ISI Mark)',
-      desc: 'Mandatory standard mark on packaging. Requires in-house testing lab, factory audit, sample verification, and STI adherence.',
-      products: 'Pressure Cookers, Electric Irons, Plugs & Sockets, PVC Cables, Toys, Steel, Cement',
+      desc: 'Mandatory standard mark on packaging. Requires in-house testing laboratory, factory audit, sample verification, and STI adherence.',
+      products: 'Pressure Cookers, Electric Irons, Plugs & Sockets, PVC Cables, Toys, Steel, Cement, Water Heaters',
       badge: 'Full Factory Inspection',
     },
     {
       id: 'Scheme-II (CRS)',
       name: 'Compulsory Registration Scheme (CRS)',
-      desc: 'Self-declaration of conformity based on test reports from BIS recognized labs. No prior factory audit required.',
+      desc: 'Self-declaration of conformity based on test reports from BIS recognized laboratories. No prior factory audit required.',
       products: 'Laptops, Mobile Phones, LED Lighting, Smart Watches, Solar Inverters',
       badge: 'Lab Testing Only',
     },
@@ -65,35 +61,35 @@ export const CompliancePanel: React.FC = () => {
   ];
 
   return (
-    <div className="h-full flex flex-col p-4 space-y-4 overflow-y-auto">
+    <div className="h-full flex flex-col p-4 space-y-4 overflow-y-auto bg-[#111217]">
       {/* Sub-Navigation Tabs */}
-      <div className="flex items-center bg-slate-900/90 border border-slate-800 rounded-xl p-1 shrink-0">
+      <div className="flex items-center bg-[#0d0e13] border border-[#222430] rounded-lg p-1 shrink-0">
         <button
           onClick={() => setActiveTab('qco')}
-          className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`flex-1 py-1.5 rounded-md text-xs font-medium transition-all ${
             activeTab === 'qco'
-              ? 'bg-bis-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-slate-200'
+              ? 'bg-[#242634] text-[#f1f2f8] border border-[#373a4d] shadow-sm'
+              : 'text-[#8c8f9f] hover:text-[#e4e5eb]'
           }`}
         >
           Quality Control Orders
         </button>
         <button
           onClick={() => setActiveTab('schemes')}
-          className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`flex-1 py-1.5 rounded-md text-xs font-medium transition-all ${
             activeTab === 'schemes'
-              ? 'bg-bis-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-slate-200'
+              ? 'bg-[#242634] text-[#f1f2f8] border border-[#373a4d] shadow-sm'
+              : 'text-[#8c8f9f] hover:text-[#e4e5eb]'
           }`}
         >
           Schemes
         </button>
         <button
           onClick={() => setActiveTab('sti')}
-          className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`flex-1 py-1.5 rounded-md text-xs font-medium transition-all ${
             activeTab === 'sti'
-              ? 'bg-bis-600 text-white shadow-md'
-              : 'text-slate-400 hover:text-slate-200'
+              ? 'bg-[#242634] text-[#f1f2f8] border border-[#373a4d] shadow-sm'
+              : 'text-[#8c8f9f] hover:text-[#e4e5eb]'
           }`}
         >
           STI Checklist
@@ -103,39 +99,39 @@ export const CompliancePanel: React.FC = () => {
       {activeTab === 'qco' && (
         <div className="space-y-3 animate-fade-in">
           <div className="flex items-center justify-between px-1">
-            <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
-              <ShieldAlert className="w-4 h-4 text-rose-400" />
+            <h4 className="text-xs font-semibold text-[#f1f2f8] flex items-center gap-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 text-[#8c8f9f]" />
               <span>Mandatory QCO Orders</span>
             </h4>
-            <span className="text-[10px] text-slate-400">Legal Gazette Notifications</span>
+            <span className="text-[10px] text-[#64677a] font-mono">Gazette Orders</span>
           </div>
 
           {qcos.length > 0 ? (
             qcos.map((q, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl glass-card border border-rose-500/30 space-y-2.5 shadow-lg"
+                className="p-3.5 rounded-xl bg-[#161720] border border-[#272937] space-y-2.5 shadow-sm"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-rose-300">
+                  <span className="font-mono text-xs font-bold text-[#f1f2f8]">
                     {q.qco_number}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[9px] uppercase font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                  <span className="px-1.5 py-0.5 rounded text-[9px] uppercase font-semibold bg-[#242634] text-[#d4d7e6] border border-[#373a4d]">
                     {q.status}
                   </span>
                 </div>
 
-                <h5 className="text-xs font-semibold text-white leading-relaxed">{q.title}</h5>
+                <h5 className="text-xs font-semibold text-[#f1f2f8] leading-relaxed font-sans">{q.title}</h5>
 
-                <div className="space-y-1 text-[11px] text-slate-300 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80">
+                <div className="space-y-1 text-[11px] text-[#c5c8d8] bg-[#121319] p-2.5 rounded-lg border border-[#222430] font-sans">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Ministry:</span>
-                    <span className="text-right text-slate-200">{q.ministry || 'DPIIT'}</span>
+                    <span className="text-[#64677a]">Ministry:</span>
+                    <span className="text-right text-[#e4e5eb]">{q.ministry || 'DPIIT'}</span>
                   </div>
                   {q.enforcement_date && (
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Enforcement Date:</span>
-                      <span className="text-amber-300 font-medium">{q.enforcement_date}</span>
+                      <span className="text-[#64677a]">Enforcement Date:</span>
+                      <span className="text-[#e4e5eb] font-mono">{q.enforcement_date}</span>
                     </div>
                   )}
                 </div>
@@ -145,23 +141,23 @@ export const CompliancePanel: React.FC = () => {
                     href={q.source_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-end gap-1 text-[11px] text-bis-400 hover:text-bis-300 font-medium pt-1"
+                    className="flex items-center justify-end gap-1 text-[11px] text-[#a4a8bc] hover:text-white font-medium pt-0.5"
                   >
-                    <span>View Gazette Notification</span>
+                    <span>View Gazette Order</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 )}
               </div>
             ))
           ) : (
-            <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 text-center space-y-2">
-              <ShieldAlert className="w-6 h-6 text-slate-500 mx-auto" />
-              <p className="text-xs text-slate-300 font-medium">
+            <div className="p-5 rounded-xl bg-[#14151c] border border-[#232533] text-center space-y-2">
+              <ShieldAlert className="w-5 h-5 text-[#64677a] mx-auto" />
+              <p className="text-xs text-[#c5c8d8] font-medium">
                 {selectedStandard
                   ? `No dedicated QCO directly mapped to ${selectedStandard.is_number}.`
                   : 'Select or query a standard to view its mandatory QCO status.'}
               </p>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-[#64677a]">
                 Standards without QCO notifications operate under voluntary BIS certification.
               </p>
             </div>
@@ -172,28 +168,28 @@ export const CompliancePanel: React.FC = () => {
       {activeTab === 'schemes' && (
         <div className="space-y-3 animate-fade-in">
           <div className="px-1">
-            <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
-              <FileBadge className="w-4 h-4 text-bis-400" />
+            <h4 className="text-xs font-semibold text-[#f1f2f8] flex items-center gap-1.5">
+              <FileBadge className="w-3.5 h-3.5 text-[#8c8f9f]" />
               <span>BIS Certification Schemes</span>
             </h4>
-            <p className="text-[11px] text-slate-400 mt-0.5">
+            <p className="text-[11px] text-[#64677a] mt-0.5">
               Conformity assessment schemes under BIS Regulations, 2018
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {schemes.map((s, idx) => (
-              <div key={idx} className="p-4 rounded-2xl glass-card border border-slate-800 space-y-2">
+              <div key={idx} className="p-3.5 rounded-xl bg-[#161720] border border-[#272937] space-y-2 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-bis-300 font-mono">{s.id}</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-bis-500/10 text-bis-300 border border-bis-500/30">
+                  <span className="font-bold text-xs text-[#f1f2f8] font-mono">{s.id}</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#20222e] text-[#a4a8bc] border border-[#303344]">
                     {s.badge}
                   </span>
                 </div>
-                <h5 className="text-xs font-semibold text-white">{s.name}</h5>
-                <p className="text-[11px] text-slate-300 leading-relaxed">{s.desc}</p>
-                <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800/80">
-                  <span className="text-slate-500">Typical Products: </span>
+                <h5 className="text-xs font-semibold text-[#f1f2f8]">{s.name}</h5>
+                <p className="text-[11px] text-[#c5c8d8] leading-relaxed">{s.desc}</p>
+                <div className="text-[10px] text-[#8c8f9f] pt-1 border-t border-[#222430]">
+                  <span className="text-[#64677a]">Typical Products: </span>
                   {s.products}
                 </div>
               </div>
@@ -205,11 +201,11 @@ export const CompliancePanel: React.FC = () => {
       {activeTab === 'sti' && (
         <div className="space-y-3 animate-fade-in">
           <div className="px-1">
-            <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-emerald-400" />
+            <h4 className="text-xs font-semibold text-[#f1f2f8] flex items-center gap-1.5">
+              <CheckCircle className="w-3.5 h-3.5 text-[#8c8f9f]" />
               <span>Scheme of Testing & Inspection (STI)</span>
             </h4>
-            <p className="text-[11px] text-slate-400 mt-0.5">
+            <p className="text-[11px] text-[#64677a] mt-0.5">
               Manufacturer certification and factory audit roadmap
             </p>
           </div>
@@ -218,14 +214,14 @@ export const CompliancePanel: React.FC = () => {
             {stiChecklist.map((step, idx) => (
               <div
                 key={idx}
-                className="p-3 rounded-xl bg-slate-900/70 border border-slate-800 flex items-start gap-3"
+                className="p-3 rounded-xl bg-[#15161f] border border-[#242634] flex items-start gap-2.5 shadow-sm"
               >
-                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold shrink-0 mt-0.5">
+                <span className="flex items-center justify-center w-5 h-5 rounded-md bg-[#222430] text-[#d4d7e6] font-mono text-xs font-bold shrink-0 mt-0.5 border border-[#333648]">
                   {idx + 1}
                 </span>
                 <div className="space-y-0.5">
-                  <h5 className="text-xs font-semibold text-white">{step.title}</h5>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">{step.desc}</p>
+                  <h5 className="text-xs font-semibold text-[#f1f2f8]">{step.title}</h5>
+                  <p className="text-[11px] text-[#b4b7cb] leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}

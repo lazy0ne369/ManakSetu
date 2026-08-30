@@ -2,10 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import { useAssistant } from '../../context/AssistantContext';
 import { MessageBubble } from './MessageBubble';
 import { QuickPrompts } from './QuickPrompts';
-import { ShieldCheck, Sparkles, Loader2, Bot } from 'lucide-react';
+import { ShieldCheck, Loader2 } from 'lucide-react';
 
 export const ChatArea: React.FC = () => {
-  const { messages, isLoading, userRole } = useAssistant();
+  const { messages, isLoading } = useAssistant();
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -13,42 +13,40 @@ export const ChatArea: React.FC = () => {
   }, [messages, isLoading]);
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-6 space-y-6 flex flex-col">
+    <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-6 flex flex-col bg-[#0b0c10]">
       {messages.length === 0 ? (
-        <div className="my-auto max-w-2xl mx-auto text-center space-y-6 animate-fade-in py-8">
-          <div className="inline-flex p-4 rounded-3xl bg-gradient-to-br from-bis-600/20 to-bis-900/40 border border-bis-500/30 text-bis-400 shadow-2xl shadow-bis-600/20">
-            <ShieldCheck className="w-12 h-12 text-bis-400" />
+        <div className="my-auto max-w-3xl mx-auto w-full text-center space-y-6 animate-fade-in py-6">
+          <div className="inline-flex p-3 rounded-2xl bg-[#15161e] border border-[#262837] text-[#d4d7e6] shadow-sm">
+            <ShieldCheck className="w-8 h-8 text-[#b2b6cb]" />
           </div>
 
-          <div className="space-y-2">
-            <h2 className="text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
-              Indian Standards & BIS Compliance Assistant
+          <div className="space-y-1.5 max-w-xl mx-auto">
+            <h2 className="text-xl lg:text-2xl font-bold text-[#f1f2f8] tracking-tight font-sans">
+              What Indian Standard or BIS service can I help you verify?
             </h2>
-            <p className="text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">
-              Explore official Indian Standards (IS), mandatory Quality Control Orders (QCO),
-              certification routes (Scheme-I ISI Mark, Scheme-II CRS), and technical test methods.
+            <p className="text-xs text-[#8c8f9f] leading-relaxed">
+              Authoritative intelligence on Indian Standards (IS), mandatory Quality Control Orders (QCO),
+              and certification schemes (Scheme-I ISI Mark & Scheme-II CRS).
             </p>
           </div>
 
           <QuickPrompts />
         </div>
       ) : (
-        <div className="max-w-4xl mx-auto w-full space-y-6">
+        <div className="max-w-4xl mx-auto w-full space-y-5">
           {messages.map((msg) => (
             <MessageBubble key={msg.id} message={msg} />
           ))}
 
           {isLoading && (
-            <div className="flex items-center gap-3 glass-card p-4 rounded-2xl border border-slate-800 animate-pulse-subtle max-w-md">
-              <div className="p-2 rounded-xl bg-bis-600/20 text-bis-400 border border-bis-500/30">
-                <Bot className="w-5 h-5 animate-spin" />
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-bis-300">
-                  Retrieving BIS Evidence & Evaluating Regulations...
+            <div className="flex items-center gap-3 p-4 rounded-xl bg-[#14151c] border border-[#232533] max-w-md animate-fade-in">
+              <Loader2 className="w-4 h-4 text-[#8c8f9f] animate-spin shrink-0" />
+              <div className="space-y-0.5 text-left">
+                <p className="text-xs font-medium text-[#e4e5eb]">
+                  Retrieving BIS Evidence & Regulatory Clauses...
                 </p>
-                <p className="text-[11px] text-slate-400">
-                  Querying vector database, BM25 index, and QCO registries
+                <p className="text-[11px] text-[#7d8092] font-mono">
+                  Vector search + BM25Okapi + QCO registries
                 </p>
               </div>
             </div>
