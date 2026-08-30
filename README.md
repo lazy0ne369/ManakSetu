@@ -242,7 +242,13 @@ python -m tests.evaluation.run_tier_evaluation
 
 ---
 
-## 📜 License & Compliance
+## 📜 License & Authorship
 
-Developed for **Smart India Hackathon (SIH26107)**.  
-All technical specifications and citations conform strictly to the published guidelines of the **Bureau of Indian Standards (BIS)** and the **Ministry of Consumer Affairs, Food & Public Distribution, Government of India**.
+This project is licensed under the **MIT License** — see the [LICENSE](file:///d:/BIS-IntelliAssist/LICENSE) file for details.
+
+- **Author / Lead Developer**: **Sohan Kumar Sahu** ([@lazy0ne369](https://github.com/lazy0ne369))
+- **Hackathon Track**: **Smart India Hackathon (SIH26107)**
+- **Domain**: AI Compliance Assistant for the Bureau of Indian Standards (BIS)
+
+All technical specifications and citations conform strictly to the published normative documents of the **Bureau of Indian Standards (BIS)** and the **Ministry of Consumer Affairs, Food & Public Distribution, Government of India**.
+
