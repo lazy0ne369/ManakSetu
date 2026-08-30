@@ -45,9 +45,6 @@ export const Header: React.FC<HeaderProps> = ({ isRightPanelOpen, onToggleRightP
               ManakSetu
               <span className="text-xs text-zinc-400 font-normal font-sans hidden sm:inline">(मानकसेतु)</span>
             </h1>
-            <span className="text-[11px] uppercase font-mono font-semibold px-2 py-0.5 rounded-md bg-[#1a1c26] text-zinc-300 border border-[#2c2f40]">
-              SIH26107
-            </span>
           </div>
           <p className="text-xs text-zinc-400 hidden sm:block font-sans">
             AI Assistant for Indian Standards & BIS Services
