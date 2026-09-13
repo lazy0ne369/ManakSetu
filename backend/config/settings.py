@@ -35,14 +35,16 @@ class Settings(BaseSettings):
     QDRANT_COLLECTION_NAME: str = "bis_standards_chunks"
 
     # LLM Settings
-    LLM_PROVIDER: str = "demo"  # "openai", "ollama", "demo"
+    LLM_PROVIDER: str = "gemini"  # "gemini", "openai", "ollama", "demo"
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "gemini-1.5-flash"
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL: str = "gpt-4o-mini"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama3.1"
 
     # Embeddings
-    EMBEDDING_PROVIDER: str = "tfidf_semantic"  # "tfidf_semantic", "openai", "local"
+    EMBEDDING_PROVIDER: str = "tfidf_semantic"  # "tfidf_semantic", "gemini", "openai", "local"
     EMBEDDING_DIMENSION: int = 384
 
     # Logging

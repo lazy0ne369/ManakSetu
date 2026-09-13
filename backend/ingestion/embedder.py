@@ -15,6 +15,23 @@ class Embedder:
         self.dimension = dimension
         self.provider = settings.EMBEDDING_PROVIDER
         self._openai_client = None
+        self._gemini_client = None
+
+        if self.provider in ["gemini", "google"] and settings.GEMINI_API_KEY:
+            try:
+                from google import genai
+                self._gemini_client = genai.Client(api_key=settings.GEMINI_API_KEY)
+            except ImportError:
+                try:
+                    import google.generativeai as genai
+                    genai.configure(api_key=settings.GEMINI_API_KEY)
+                    self._gemini_client = genai
+                except Exception as e:
+                    logger.warning(f"Failed to initialize Gemini client for embeddings: {e}. Falling back to semantic projection.")
+                    self.provider = "tfidf_semantic"
+            except Exception as e:
+                logger.warning(f"Failed to initialize Gemini client for embeddings: {e}. Falling back to semantic projection.")
+                self.provider = "tfidf_semantic"
 
         if self.provider == "openai" and settings.OPENAI_API_KEY:
             try:
@@ -28,6 +45,23 @@ class Embedder:
         """Generates a single dense vector embedding of dimension `self.dimension`."""
         if not text or not text.strip():
             return [0.0] * self.dimension
+
+        if self.provider in ["gemini", "google"] and self._gemini_client:
+            try:
+                if hasattr(self._gemini_client, "models"):
+                    res = self._gemini_client.models.embed_content(
+                        model="text-embedding-004",
+                        contents=text,
+                    )
+                    return res.embedding.values[: self.dimension]
+                else:
+                    res = self._gemini_client.embed_content(
+                        model="models/text-embedding-004",
+                        content=text,
+                    )
+                    return res["embedding"][: self.dimension]
+            except Exception as e:
+                logger.warning(f"Gemini embedding error: {e}. Falling back to semantic projection.")
 
         if self.provider == "openai" and self._openai_client:
             try:

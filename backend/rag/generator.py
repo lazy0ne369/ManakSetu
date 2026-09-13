@@ -34,7 +34,30 @@ class LLMGenerator:
     def __init__(self):
         self.provider = settings.LLM_PROVIDER
         self._openai_client = None
+        self._gemini_client = None
+        self._gemini_sdk_type = None
         self._ollama_url = settings.OLLAMA_BASE_URL
+
+        if self.provider in ["gemini", "google"] and settings.GEMINI_API_KEY:
+            try:
+                from google import genai
+                self._gemini_client = genai.Client(api_key=settings.GEMINI_API_KEY)
+                self._gemini_sdk_type = "google-genai"
+            except ImportError:
+                try:
+                    import google.generativeai as genai
+                    genai.configure(api_key=settings.GEMINI_API_KEY)
+                    self._gemini_client = genai.GenerativeModel(
+                        model_name=settings.GEMINI_MODEL,
+                        system_instruction=SYSTEM_PROMPT_TEMPLATE,
+                    )
+                    self._gemini_sdk_type = "google-generativeai"
+                except Exception as e:
+                    logger.warning(f"Could not init Gemini client: {e}. Defaulting to deterministic generator.")
+                    self.provider = "demo"
+            except Exception as e:
+                logger.warning(f"Could not init Gemini client: {e}. Defaulting to deterministic generator.")
+                self.provider = "demo"
 
         if self.provider == "openai" and settings.OPENAI_API_KEY:
             try:
@@ -69,14 +92,21 @@ class LLMGenerator:
                 clarification_question=parsed_query.clarification_question,
             )
 
-        # 2. If OpenAI is configured and available
+        # 2. If Gemini is configured and available
+        if self.provider in ["gemini", "google"] and self._gemini_client:
+            try:
+                return self._generate_gemini(parsed_query, evidence, confidence, citations)
+            except Exception as e:
+                logger.error(f"Gemini generation error: {e}. Falling back to deterministic synthesizer.")
+
+        # 3. If OpenAI is configured and available
         if self.provider == "openai" and self._openai_client:
             try:
                 return self._generate_openai(parsed_query, evidence, confidence, citations)
             except Exception as e:
                 logger.error(f"OpenAI generation error: {e}. Falling back to deterministic synthesizer.")
 
-        # 3. Fallback / Demo Deterministic Synthesizer
+        # 4. Fallback / Demo Deterministic Synthesizer
         return self._generate_deterministic(parsed_query, evidence, confidence, citations)
 
     def _generate_deterministic(
@@ -228,6 +258,80 @@ Generate a complete JSON response adhering strictly to the facts above."""
         )
 
         raw_json = json.loads(response.choices[0].message.content)
+
+        return StructuredResponse(
+            answer=raw_json.get("answer", ""),
+            applicable_standards=evidence.standards,
+            applicability_reason=raw_json.get("applicability_reason"),
+            certification_status=raw_json.get("certification_status", "Mandatory" if evidence.qcos else "Voluntary"),
+            certification_scheme=raw_json.get("certification_scheme", "Scheme-I (ISI Mark)"),
+            qcos=evidence.qcos,
+            key_requirements=raw_json.get("key_requirements", []),
+            compliance_steps=raw_json.get("compliance_steps", []),
+            sources=citations,
+            confidence=confidence,
+            needs_clarification=False,
+            clarification_question=None,
+        )
+
+    def _generate_gemini(
+        self,
+        parsed_query: ParsedQuery,
+        evidence: EvidencePack,
+        confidence: ConfidenceLevel,
+        citations: List[CitationItem],
+    ) -> StructuredResponse:
+        """Invokes Gemini API with structured evidence and strict schema adherence."""
+        evidence_dict = {
+            "standards": [s.model_dump() for s in evidence.standards],
+            "qcos": [q.model_dump() for q in evidence.qcos],
+            "document_excerpts": [e.model_dump() for e in evidence.document_excerpts],
+        }
+
+        user_content = f"""USER QUERY: "{parsed_query.original_query}"
+USER ROLE: {parsed_query.user_role.value}
+PRODUCT: {parsed_query.product}
+EXTRACTED IS NUMBER: {parsed_query.is_number}
+
+EVIDENCE PACK:
+{json.dumps(evidence_dict, indent=2)}
+
+Generate a complete JSON response adhering strictly to the facts above with keys:
+"answer", "applicability_reason", "certification_status", "certification_scheme", "key_requirements", "compliance_steps"."""
+
+        if self._gemini_sdk_type == "google-genai":
+            from google.genai import types
+            response = self._gemini_client.models.generate_content(
+                model=settings.GEMINI_MODEL,
+                contents=user_content,
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_PROMPT_TEMPLATE,
+                    response_mime_type="application/json",
+                    temperature=0.0,
+                ),
+            )
+            raw_text = response.text
+        else:
+            import google.generativeai as genai
+            response = self._gemini_client.generate_content(
+                user_content,
+                generation_config=genai.GenerationConfig(
+                    response_mime_type="application/json",
+                    temperature=0.0,
+                ),
+            )
+            raw_text = response.text
+
+        clean_json = raw_text.strip()
+        if clean_json.startswith("```json"):
+            clean_json = clean_json[7:]
+        if clean_json.startswith("```"):
+            clean_json = clean_json[3:]
+        if clean_json.endswith("```"):
+            clean_json = clean_json[:-3]
+        clean_json = clean_json.strip()
+
+        raw_json = json.loads(clean_json)
 
         return StructuredResponse(
             answer=raw_json.get("answer", ""),
